@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,15 @@ namespace NSE.WebApp.MVC.Controllers
                 ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage)).ToList();
 
             return RedirectToAction("EnderecoEntrega", "Pedido");
+        }
+
+        [HttpGet]
+        [Route("meu-perfil/{id}")]
+        public async Task<IActionResult> MeuPerfil(Guid id)
+        { 
+            var cliente = await _clienteService.ObterPerfil(id);
+
+            return View(cliente);
         }
     }
 }

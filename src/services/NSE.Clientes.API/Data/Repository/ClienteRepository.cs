@@ -38,6 +38,11 @@ namespace NSE.Clientes.API.Data.Repository
             return await _context.Enderecos.FirstOrDefaultAsync(e => e.ClienteId == id);
         }
 
+        public async Task<Cliente> ObterPerfilPorId(Guid id)
+        {
+            return await _context.Clientes.FindAsync(id);
+        }
+
         public void AdicionarEndereco(Endereco endereco)
         {
             _context.Enderecos.Add(endereco);

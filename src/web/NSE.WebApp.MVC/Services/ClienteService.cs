@@ -13,6 +13,7 @@ namespace NSE.WebApp.MVC.Services
     {
         Task<EnderecoViewModel> ObterEndereco();
         Task<ResponseResult> AdicionarEndereco(EnderecoViewModel endereco);
+        Task<ClienteViewModel> ObterPerfil(Guid id);
     }
 
     public class ClienteService : Service, IClienteService
@@ -34,6 +35,17 @@ namespace NSE.WebApp.MVC.Services
             TratarErrosResponse(response);
 
             return await DeserializarObjetoResponse<EnderecoViewModel>(response);
+        }
+
+        public async Task<ClienteViewModel> ObterPerfil(Guid id)
+        {
+            var response = await _httpClient.GetAsync($"/cliente/meu-perfil/{id}");
+
+            if (response.StatusCode == HttpStatusCode.NotFound) return null;
+
+            TratarErrosResponse(response);
+
+            return await DeserializarObjetoResponse<ClienteViewModel>(response);
         }
 
         public async Task<ResponseResult> AdicionarEndereco(EnderecoViewModel endereco)

@@ -14,5 +14,6 @@ namespace NSE.Clientes.API.Models
 
         void AdicionarEndereco(Endereco endereco);
         Task<Endereco> ObterEnderecoPorId(Guid id);
+        Task<Cliente> ObterPerfilPorId(Guid id);
     }
 }

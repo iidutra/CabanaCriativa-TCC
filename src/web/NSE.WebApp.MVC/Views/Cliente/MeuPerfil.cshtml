@@ -1,0 +1,27 @@
+﻿@using NSE.WebApp.MVC.Extensions
+@model NSE.WebApp.MVC.Models.ClienteViewModel
+
+@{
+    ViewData["Title"] = Model.Nome;
+}
+
+<section class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-click">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.Nome</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
