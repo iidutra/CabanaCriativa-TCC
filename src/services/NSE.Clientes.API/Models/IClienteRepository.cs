@@ -13,6 +13,7 @@ namespace NSE.Clientes.API.Models
         Task<Cliente> ObterPorCpf(string cpf);
 
         void AdicionarEndereco(Endereco endereco);
+        void EditarEndereco(Endereco endereco);
         Task<Endereco> ObterEnderecoPorId(Guid id);
         Task<Cliente> ObterPerfilPorId(Guid id);
     }

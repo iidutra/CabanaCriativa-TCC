@@ -23,6 +23,7 @@ namespace NSE.Clientes.API.Configuration
 
             services.AddScoped<IRequestHandler<RegistrarClienteCommand, ValidationResult>, ClienteCommandHandler>();
             services.AddScoped<IRequestHandler<AdicionarEnderecoCommand, ValidationResult>, ClienteCommandHandler>();
+            services.AddScoped<IRequestHandler<EditarEnderecoCommand, ValidationResult>, ClienteCommandHandler>();
 
             services.AddScoped<INotificationHandler<ClienteRegistradoEvent>, ClienteEventHandler>();
 

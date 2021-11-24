@@ -48,6 +48,11 @@ namespace NSE.Clientes.API.Data.Repository
             _context.Enderecos.Add(endereco);
         }
 
+        public void EditarEndereco(Endereco endereco)
+        {
+            _context.Enderecos.Update(endereco);
+        }
+
         public void Dispose()
         {
             _context.Dispose();

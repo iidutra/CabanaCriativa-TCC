@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using NSE.Core.Communication;
 using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Models;
 
@@ -12,6 +13,7 @@ namespace NSE.WebApp.MVC.Services
     {
         Task<PagedViewModel<ProdutoViewModel>> ObterTodos(int pageSize, int pageIndex, string query = null);
         Task<ProdutoViewModel> ObterPorId(Guid id);
+        Task<ResponseResult> Adicionar(ProdutoViewModel produtoViewModel);
     }
     public class CatalogoService : Service, ICatalogoService
     {
@@ -32,6 +34,15 @@ namespace NSE.WebApp.MVC.Services
             TratarErrosResponse(response);
 
             return await DeserializarObjetoResponse<ProdutoViewModel>(response);
+        }
+
+        public async Task<ResponseResult> Adicionar(ProdutoViewModel produtoViewModel)
+        {
+            var produtoContent = ObterConteudo(produtoViewModel);
+
+            var response = await _httpClient.PostAsync("/catalogo/produtos/", produtoContent);
+
+            return await DeserializarObjetoResponse<ResponseResult>(response);
         }
 
         public async Task<PagedViewModel<ProdutoViewModel>> ObterTodos(int pageSize, int pageIndex, string query = null)

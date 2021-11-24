@@ -37,6 +37,13 @@ namespace NSE.Clientes.API.Controllers
             return CustomResponse(await _mediator.EnviarComando(endereco));
         }
 
+        [HttpPut("cliente/endereco")]
+        public async Task<IActionResult> EditarEndereco(EditarEnderecoCommand endereco)
+        {
+            endereco.ClienteId = _user.ObterUserId();
+            return CustomResponse(await _mediator.EnviarComando(endereco));
+        }
+
         [HttpGet("cliente/meu-perfil/{id}")]
         public async Task<Cliente> MeuPerfil(Guid id)
         {

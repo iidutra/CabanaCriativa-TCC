@@ -29,6 +29,17 @@ namespace NSE.WebApp.MVC.Controllers
             return RedirectToAction("EnderecoEntrega", "Pedido");
         }
 
+        [HttpPut]
+        public async Task<IActionResult> EditarEndereco(EnderecoViewModel endereco)
+        {
+            var response = await _clienteService.EditarEndereco(endereco);
+
+            if (ResponsePossuiErros(response)) TempData["Erros"] =
+                 ModelState.Values.SelectMany(v => v.Errors.Select(e => e.ErrorMessage)).ToList();
+
+            return RedirectToAction("EnderecoEntrega", "Pedido");
+        }
+
         [HttpGet]
         [Route("meu-perfil/{id}")]
         public async Task<IActionResult> MeuPerfil(Guid id)

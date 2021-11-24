@@ -13,6 +13,7 @@ namespace NSE.WebApp.MVC.Services
     {
         Task<EnderecoViewModel> ObterEndereco();
         Task<ResponseResult> AdicionarEndereco(EnderecoViewModel endereco);
+        Task<ResponseResult> EditarEndereco(EnderecoViewModel endereco);
         Task<ClienteViewModel> ObterPerfil(Guid id);
     }
 
@@ -53,6 +54,17 @@ namespace NSE.WebApp.MVC.Services
             var enderecoContent = ObterConteudo(endereco);
 
             var response = await _httpClient.PostAsync("/cliente/endereco/", enderecoContent);
+
+            if (!TratarErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
+
+            return RetornoOk();
+        }
+
+        public async Task<ResponseResult> EditarEndereco(EnderecoViewModel endereco)
+        {
+            var enderecoContent = ObterConteudo(endereco);
+
+            var response = await _httpClient.PutAsync("/cliente/endereco/", enderecoContent);
 
             if (!TratarErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
